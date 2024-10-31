@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+
+<nav th:replace="fragments/header :: nav"></nav>
+
+
+<div class="container-fluid" style="max-width: 900px; margin: 0 auto;">
+    <h2 class="text-center">发育标准</h2>
+
+    <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
+         role="alert">
+        [[${message}]]
+        <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="my-3">
+        <form th:action="@{/growthStandards}">
+            <div class="row d-flex">
+                <div class="col-md-6 mt-2">
+                    <div class="search">
+                        <i class="fa fa-search"></i>
+                        <input id="keyword" type="search" name="keyword" th:value="${keyword}" required class="form-control"
+                               placeholder="Enter keyword">
+                        <button type="submit" class="btn btn-secondary">Search</button>
+                    </div>
+                </div>
+<!--                <div class="col-md-6 mt-2">-->
+<!--                    <button id="btnClear" class="btn btn-info">Clear</button>-->
+<!--                </div>-->
+            </div>
+        </form>
+    </div>
+
+    <div th:if="${growthStandards.size() > 0}">
+        <table class="table table-hover table-responsive-xl">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">类型</th>
+                <th scope="col">月龄</th>
+                <th scope="col">等级</th>
+                <th scope="col">参考值</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="growthStandard : ${growthStandards}">
+                <th scope="row">[[${growthStandard.growthStandardId}]]</th>
+                <td>[[${growthStandard.growthStandardType}]]</td>
+                <td>[[${growthStandard.moonAge}]]</td>
+                <td>[[${growthStandard.level}]]</td>
+                <td>[[${growthStandard.standardValue}]]</td>
+<!--                <td>-->
+<!--                    <a th:if="${growthStandard.published == true}" class="fa-regular fa-square-check"-->
+<!--                       th:href="@{'/growthStandards/' + ${growthStandard.id} + '/published/false'}" title="Disable this growthStandard"></a>-->
+<!--                    <a th:if="${growthStandard.published == false}" class="fa-regular fa-square icon-dark"-->
+<!--                       th:href="@{'/growthStandards/' + ${growthStandard.id} + '/published/true'}" title="Enable this growthStandard"></a>-->
+<!--                </td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="" th:unless="${growthStandards.size() > 0}">
+        <span>暂无数据!</span>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="confirmModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <span id="confirmText"></span>
+            </div>
+
+            <div class="modal-footer">
+                <a type="button" id="yesBtn" class="btn btn-danger">Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+
+<!--<div th:replace="fragments/jsScripts :: scripts"></div>-->
+
+
+</body>
+</html>
