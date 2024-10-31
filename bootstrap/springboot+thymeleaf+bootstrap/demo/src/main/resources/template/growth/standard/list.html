@@ -45,6 +45,7 @@
                 <th scope="col">月龄</th>
                 <th scope="col">等级</th>
                 <th scope="col">参考值</th>
+                <th scope="col">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -54,6 +55,12 @@
                 <td>[[${growthStandard.moonAge}]]</td>
                 <td>[[${growthStandard.level}]]</td>
                 <td>[[${growthStandard.standardValue}]]</td>
+                <td><a style="text-decoration: none; color: blue;"
+                       th:href="@{/adminPage/roles/{id}(id=${growthStandard.growthStandardId})}" class="edit-btn"
+                       data-toggle="tooltip" data-placement="right" title="Edit role">
+                    <i class="fa fa-edit"></i>
+                </a>
+                </td>
 <!--                <td>-->
 <!--                    <a th:if="${growthStandard.published == true}" class="fa-regular fa-square-check"-->
 <!--                       th:href="@{'/growthStandards/' + ${growthStandard.id} + '/published/false'}" title="Disable this growthStandard"></a>-->
@@ -95,7 +102,7 @@
 <footer th:replace="fragments/footer :: footer"></footer>
 
 
-<!--<div th:replace="fragments/jsScripts :: scripts"></div>-->
+<div th:replace="fragments/jsScripts :: scripts"></div>
 
 
 </body>
